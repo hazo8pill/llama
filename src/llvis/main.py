@@ -33,7 +33,7 @@ prompt_template += """
 start = time.time()
 
 res = ollama.chat(
-    model="qwen2.5vl:latest",
+    model="moondream",
     messages=[{"role": "user", "content": prompt_template, "images": image_paths}],
 )
 
