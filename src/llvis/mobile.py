@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import time
 from tensorflow.keras.applications import MobileNetV3Small
 from tensorflow.keras.applications.mobilenet_v3 import preprocess_input
 from tensorflow.keras.preprocessing import image
@@ -13,6 +14,8 @@ TOP_N = 3                            # сколько наиболее похо�
 # ==== 1. Загружаем модель MobileNetV3Small ====
 print("[INFO] Загружаю модель MobileNetV3Small...")
 model = MobileNetV3Small(weights="imagenet", include_top=False, pooling="avg")
+
+start = time.time()
 
 # ==== 2. Функция получения эмбеддинга ====
 def get_embedding(img_path):
@@ -48,3 +51,5 @@ results.sort(key=lambda x: x[1], reverse=True)
 print("\n=== Наиболее похожие изображения ===", results)
 for filename, sim in results[:TOP_N]:
     print(f"{filename} — схожесть {sim:.4f}")
+
+print(f"[INFO] Общее время обработки: {time.time() - start:.2f} секунд")
